@@ -34,6 +34,12 @@ img {
   align-items: center;
 }
 
+@media only screen and (max-width: 768px) {
+  .slider-controls {
+    visibility: hidden;
+  }
+}
+
 #prev-btn, #next-btn {
   padding: 3%;
   border-color: transparent;

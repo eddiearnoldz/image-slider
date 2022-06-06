@@ -23,6 +23,7 @@ const slideWidth = slides[index].clientWidth;
 
 slide.style.transform = `translateX(${-slideWidth*index}px)`
 
+//auotplay slides
 const startSlide = () => {
   slideId = setInterval(()=> {
    moveToNextSlide();
@@ -32,6 +33,9 @@ const startSlide = () => {
 const getSlides = () => {
   return slides = document.querySelectorAll('.slide');
 }
+
+
+//infinite loop slides
 
 slide.addEventListener('transitionend', () => {
   slides = getSlides()
@@ -63,13 +67,33 @@ const moveToPreviousSlide = () => {
   slide.style.transition = '.7s';
 }
 
+//stop autoplay when mouse enters
 slideContainer.addEventListener('mouseenter', () => {
   clearInterval(slideId)
 });
 
+//restart autoplay when mouse leaves
 slideContainer.addEventListener('mouseleave', startSlide);
 
 nextBtn.addEventListener('click', moveToNextSlide);
 prevBtn.addEventListener('click', moveToPreviousSlide);
+
+//touch slide for mobile
+let touchstartX = 0
+let touchendX = 0
+    
+const checkDirection = () => {
+  if (touchendX < touchstartX) moveToNextSlide();
+  if (touchendX > touchstartX) moveToPreviousSlide();
+}
+
+slideContainer.addEventListener('touchstart', e => {
+  touchstartX = e.changedTouches[0].clientX
+})
+
+slideContainer.addEventListener('touchend', e => {
+  touchendX = e.changedTouches[0].clientX
+  checkDirection()
+})
 
 startSlide();
