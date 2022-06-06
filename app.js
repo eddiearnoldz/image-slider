@@ -3,11 +3,12 @@ const slide = document.querySelector('.slides');
 const nextBtn = document.querySelector('#next-btn');
 const prevBtn = document.querySelector('#prev-btn');
 const interval = 3000
-const displayedImages = 2
+
 
 let slides = document.querySelectorAll('.slide');
 let index = 1;
 let slideId;
+slide.style.width = '100%'; //images per slide 50%=2, 33.3%=3, 25%=4
 
 const firstClone = slides[0].cloneNode(true);
 const lastClone = slides[slides.length - 1].cloneNode(true);
